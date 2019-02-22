@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // Model List
-const Idea = require('../models/idea');
+const Idea = require('../models/Idea');
 
 router.get('/', (req, res) => {
 
