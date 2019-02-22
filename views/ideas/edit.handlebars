@@ -11,7 +11,9 @@
     <h5 class="card-title"> Edit Idea </h5>
 
   <form action="/ideas/{{idea.id}}?_method=PUT" method="post">
+
         <input type="hidden" name="_method" value="PUT">
+
         <div class="form-group">
             <label for="idea"> IDea </label>
             <input type="text" required name="idea" class="form-control" id="idea" value="{{idea.title}}" >

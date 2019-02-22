@@ -15,10 +15,20 @@
 </head>
 <body>
 
+    {{!-- Navigation --}}
     {{> _nav}}
+    {{!-- Navigation End --}}
 
     <div class="container pt-3">
+
+        {{!-- Flash Message --}}
+        {{> _msg}}
+        {{!-- Flash Message End --}}
+
+        {{!-- Layout Content --}}
         {{{body}}}
+        {{!-- Layout Content End--}}
+
     </div>
 
 </body>

@@ -1,9 +1,17 @@
+<a href="/ideas/add" class="btn btn-outline-primary btn-block btn-small mb-2"> Add Ideas</a>
+
 {{#each ideas}}
     
     <div class="card card-body mb-2">
         <h4>{{title}}</h4>
         <p>{{details}}</p>
-        <a href="/ideas/edit/{{id}}" class="btn btn-outline-dark btn-sm btn-block"> Edit </a>
+        <a href="/ideas/edit/{{id}}" class="btn btn-dark btn-sm btn-block mb-2"> Edit </a>
+
+        <form method="post" action="/ideas/{{id}}?_method=DELETE">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit"  class="btn btn-danger btn-sm btn-block" value="Delete">
+        </form>
+
     </div>
  
 {{else}}
