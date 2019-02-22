@@ -1,12 +1,25 @@
 const express = require('express');
-const User = require('../models/User');
 const bcrypt = require('bcryptjs');
-
+const passport = require('passport');
 const router = express.Router();
+
+const User = require('../models/User');
+
 
 router.get('/login', (req, res) => {
     res.render('users/login');
 });
+
+router.post('/login', (req, res, next) => {
+
+    passport.authenticate('local', {
+        successRedirect: '/ideas',
+        failureRedirect: '/users/login',
+        failureFlash: true
+    })(req, res, next);
+    
+});
+
 
 router.get('/register', (req, res) => {
     res.render('users/register');
@@ -15,23 +28,23 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
 
     const { name, email, password, confirmpassword } = req.body;
-    const error = [];
+    const errors = [];
 
     if( password != confirmpassword ) {
-        error.push({text: 'Password Do Not Match'});
+        errors.push({text: 'Password Do Not Match'});
     }
 
     if( password.length <= 4 ) {
-        error.push({text: 'Password must be AtLeast 4 characters'});
+        errors.push({text: 'Password must be AtLeast 4 characters'});
     }
 
-    if( error.length > 0 ) {
+    if( errors.length > 0 ) {
         res.render('users/register', {
             name,
             email,
             password,
             confirmpassword,
-            error
+            errors
         });
     } else {
 
@@ -59,13 +72,13 @@ router.post('/register', (req, res) => {
                         });
                     });
                 } else {
-                    error.push({text: 'Email is Already Used'});
+                    errors.push({text: 'Email is Already Used'});
                     res.render('users/register', {
                         name,
                         email,
                         password,
                         confirmpassword,
-                        error
+                        errors
                     });
                 }
             })

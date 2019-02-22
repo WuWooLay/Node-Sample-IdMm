@@ -18,19 +18,19 @@ router.get('/add', (req, res) => {
 
 router.post('/add', (req, res) => {
     console.log(req.body);
-    const error = [];
+    const errors = [];
 
     if(!req.body.idea) {
-        error.push({'text': 'Title Needed'});
+        errors.push({'text': 'Title Needed'});
     }
 
     if(!req.body.details) {
-        error.push({'text': 'Details Needed'});
+        errors.push({'text': 'Details Needed'});
     }
 
-    if(error.length > 0) {
+    if(errors.length > 0) {
         res.render('ideas/add', {
-            error,
+            errors,
             title: req.body.idea,
             details: req.body.details
         });

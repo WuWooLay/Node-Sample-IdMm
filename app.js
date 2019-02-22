@@ -10,11 +10,16 @@ const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
 const port = config.get('port');
+const passport = require('passport');
 const app = express();
 
 // For Routers
 const ideas = require('./routes/ideas');
 const users = require('./routes/users');
+
+// call LocalPassport
+const LocalPassport = require('./config/passport');
+LocalPassport(passport);
 
 // Get Rid Of Warning, Mapping Global Promise 
 mongoose.Promise = global.Promise;
@@ -24,10 +29,10 @@ mongoose.connect('mongodb://localhost/mm_video', {useNewUrlParser: true})
     .catch((err) => console.error(err));
 
 // If Development Use Morgan
-if(app.get('env') === 'development') {
-        app.use(morgan('tiny'));
-        console.log('Use Morgan...');
-}
+// if(app.get('env') === 'development') {
+//         app.use(morgan('tiny'));
+//         console.log('Use Morgan...');
+// }
 
 // Middleware For Various HTTP
 app.use(helmet());
