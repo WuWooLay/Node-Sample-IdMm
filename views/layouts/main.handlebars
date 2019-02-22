@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> Handles Bars With Node Js</title>
 
+    <link rel="icon" href="/image/logo.png" sizes="64x64" type="image/png"> 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
@@ -26,6 +27,10 @@
         {{> _msg}}
         {{!-- Flash Message End --}}
 
+        {{!-- All Errors --}}
+        {{> _error}}
+        {{!-- All Errors End --}}
+        
         {{!-- Layout Content --}}
         {{{body}}}
         {{!-- Layout Content End--}}
