@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
-const port = 5000;
+const port = config.get('port');
 const app = express();
 
 // For Routers
@@ -22,6 +22,12 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/mm_video', {useNewUrlParser: true})
     .then(() => console.log('Connect MongoDb...'))
     .catch((err) => console.error(err));
+
+// If Development Use Morgan
+if(app.get('env') === 'development') {
+        app.use(morgan('tiny'));
+        console.log('Use Morgan...');
+}
 
 // Middleware For Various HTTP
 app.use(helmet());
