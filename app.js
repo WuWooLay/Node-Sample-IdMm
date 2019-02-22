@@ -55,7 +55,7 @@ app.set('view engine', 'handlebars');
 
 // Routes
 app.get('/', (req, res) => {
-    const title = "Text Crud";
+    const title = "Ideas Crud";
     res.render('index', {title});
 });
 
