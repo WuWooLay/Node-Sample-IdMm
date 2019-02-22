@@ -1,0 +1,31 @@
+<div class="card" style="">
+  <div class="card-body">
+
+    {{#each error}}
+        <div class="alert alert-danger">
+            {{text}}
+        </div>
+    {{else}}
+    {{/each}}
+
+    <h5 class="card-title"> Edit Idea </h5>
+
+  <form action="/ideas/{{idea.id}}?_method=PUT" method="post">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="form-group">
+            <label for="idea"> IDea </label>
+            <input type="text" required name="idea" class="form-control" id="idea" value="{{idea.title}}" >
+        </div>
+
+        <div class="form-group">
+            <label for="details"> Details </label>
+            <input type="text" required class="form-control" id="details" name="details" value="{{idea.details}}" >
+        </div>
+
+        <button type="submit" class="btn btn-outline-dark btn-sm"> Update </button>
+        <a href="/ideas" class="btn btn-outline-danger btn-sm"> Back </a>
+
+  </form>
+
+  </div>
+</div>
