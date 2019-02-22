@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const helmet = require('helmet');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
@@ -9,7 +10,9 @@ const session = require('express-session');
 const port = 5000;
 const app = express();
 
+// For Routers
 const ideas = require('./routes/ideas');
+const users = require('./routes/users');
 
 // Get Rid Of Warning, Mapping Global Promise 
 mongoose.Promise = global.Promise;
@@ -27,6 +30,9 @@ app.use(bodyParser.json());
 // override with the "_method" header in the request
 app.use(methodOverride('_method'));
 
+// Static Public Place
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Express Session Middleware
 app.use(session({
     secret: 'secret',
@@ -42,7 +48,6 @@ app.use( (req, res, next) => {
     res.locals.error = req.flash('error');
     next();
 });
-
 
 // Use HandleBars Engine
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -60,6 +65,7 @@ app.get('/about', (req, res) => {
 
 //Routes
 app.use('/ideas', ideas);
+app.use('/users', users);
 
 app.listen(port, () => {
     console.log(`Server Started On Port ${port}`);
