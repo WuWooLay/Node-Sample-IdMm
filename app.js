@@ -13,12 +13,12 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    const title = "Home Page";
+    const title = "Text Crud";
     res.render('index', {title});
 });
 
 app.get('/about', (req, res) => {
-    res.send('About Page');
+    res.render('about');
 });
 
 app.listen(port, () => {
