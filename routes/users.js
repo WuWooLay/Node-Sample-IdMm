@@ -90,5 +90,10 @@ router.post('/register', (req, res) => {
 
 });
 
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'Successfully Logout!');
+    res.redirect('/users/login');
+})
 
 module.exports = router;

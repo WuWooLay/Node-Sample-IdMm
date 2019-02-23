@@ -16,20 +16,27 @@
                 </ul>
 
                 <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/users/login">Login</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/users/register">Register</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Idea View/Add
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/ideas">Ideas</a>
-                            <a class="dropdown-item" href="/ideas/add">Add Idea</a>
-                        </li>
+                        
+                        
+                        {{#if user}}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Idea View/Add
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/ideas">Ideas</a>
+                                <a class="dropdown-item" href="/ideas/add">Add Idea</a>
+                                <a class="dropdown-item" href="/users/logout">Logout</a>
+                            </li>
+                        {{else}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users/login">Login</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users/register">Register</a>
+                            </li>
+                        {{/if}}
+
                 </ul>
 
             </div>

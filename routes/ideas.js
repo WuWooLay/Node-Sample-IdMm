@@ -1,22 +1,23 @@
 const express = require('express');
 const router = express.Router();
+const {isLogin} = require('../middleware/helper');
 // Model List
 const Idea = require('../models/Idea');
 
-router.get('/', (req, res) => {
+router.get('/', isLogin, (req, res) => {
 
-    Idea.find({})
+    Idea.find({user: req.user.id})
         .sort({'date': -1})
         .then( ideas => res.render('ideas/index', {ideas}) )
         .catch( err => console.error('error => ', err));
 
 });
 
-router.get('/add', (req, res) => {
+router.get('/add', isLogin, (req, res) => {
     res.render('ideas/add');
 });
 
-router.post('/add', (req, res) => {
+router.post('/add', isLogin, (req, res) => {
     console.log(req.body);
     const errors = [];
 
@@ -39,6 +40,7 @@ router.post('/add', (req, res) => {
         let idea = new Idea({
             title: req.body.idea,
             details: req.body.details,
+            user: req.user.id
         });
 
         idea = idea.save()
@@ -49,21 +51,26 @@ router.post('/add', (req, res) => {
 
 });
 
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', isLogin, (req, res) => {
     const _id = req.params.id;
 
     Idea.findById({
         _id
     }).then((idea) => {
-        res.render('ideas/edit', {
-            idea
-        });
+        if( idea.user != req.user.id ) {
+            req.flash('error_msg', 'Not Authorize');
+            res.redirect('/ideas');
+        } else {
+            res.render('ideas/edit', {
+                idea
+            });
+        }
     })
     .catch(err => console.err(err));
     
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', isLogin, (req, res) => {
     const _id = req.params.id;
 
     Idea.findById({_id})
@@ -81,7 +88,7 @@ router.put('/:id', (req, res) => {
         .catch(err => console.error(err));
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', isLogin, (req, res) => {
     const _id = req.params.id;
 
     Idea.remove({_id})
