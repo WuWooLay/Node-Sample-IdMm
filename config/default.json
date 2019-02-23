@@ -1,5 +1,8 @@
 {
     "name" : "My Express App",
     "salt" : "SecretCode",
-    "port" : 5000
+    "port" : 5000,
+    "mgdb" : "PJA3uCA3erhB6Jb",
+    "mguser" : "lwinmoepaing",
+    "mongoURI" : "mongodb://localhost/ideas-mm"
 }

@@ -23,15 +23,15 @@ LocalPassport(passport);
 // Get Rid Of Warning, Mapping Global Promise 
 mongoose.Promise = global.Promise;
 // Connect MongoDb 
-mongoose.connect('mongodb://localhost/mm_video', {useNewUrlParser: true})
+mongoose.connect(config.get('mongoURI'), {useNewUrlParser: true})
     .then(() => console.log('Connect MongoDb...'))
     .catch((err) => console.error(err));
 
 // If Development Use Morgan
-// if(app.get('env') === 'development') {
-//         app.use(morgan('tiny'));
-//         console.log('Use Morgan...');
-// }
+if(app.get('env') === 'development') {
+        app.use(morgan('tiny'));
+        console.log('Use Morgan...');
+}
 
 // Middleware For Various HTTP
 app.use(helmet());
