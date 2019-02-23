@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
-const port = config.get('port');
 const passport = require('passport');
 const app = express();
 
@@ -85,6 +84,8 @@ app.get('/about', (req, res) => {
 //Routes
 app.use('/ideas', ideas);
 app.use('/users', users);
+
+const port = process.env.PORT || config.get('port');
 
 app.listen(port, () => {
     console.log(`Server Started On Port ${port}`);
